@@ -8,9 +8,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { TableComponent } from './layout/table/table.component';
 import { HeaderComponent } from './header/header.component';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     TableComponent,
     DashboardComponent,
@@ -20,6 +21,7 @@ import { HeaderComponent } from './header/header.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
