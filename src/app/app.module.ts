@@ -9,6 +9,12 @@ import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { TableComponent } from './layout/table/table.component';
 import { HeaderComponent } from './header/header.component';
 import { HttpClientModule } from '@angular/common/http';
+import { TableModule } from 'primeng/table';
+import { ButtonModule } from 'primeng/button';
+import { DialogModule } from 'primeng/dialog';
+import { CardModule } from 'primeng/card';
+import { FormsModule } from '@angular/forms';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -16,12 +22,18 @@ import { HttpClientModule } from '@angular/common/http';
     TableComponent,
     DashboardComponent,
     NotFoundComponent,
-      HeaderComponent
+    HeaderComponent,
+    LoginComponent
    ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    TableModule,
+    ButtonModule,
+    DialogModule,
+    CardModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

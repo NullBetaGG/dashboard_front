@@ -1,0 +1,26 @@
+.color-change {
+  width: 100%;
+  height: 50px;
+  background: linear-gradient(to right, black, #FF6600);
+  animation: color-change 5s infinite;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.user-button {
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 0;
+}
+
+.user-button img {
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+@keyframes color-change {
+  0% { background-position: left; }
+  100% { background-position: right; }
+}

@@ -1,3 +1,20 @@
-<p>
-  table works!
-</p>
+<div style="width: 100vw; background-color: black;">
+  <p-table [value]="dataArray" [tableStyle]="{'min-width': '50rem'}">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Cidade Comprador</th>
+            <th>Cidade Fornecedor</th>
+            <th>Comprador</th>
+            <th>Estado Comprador</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-data>
+        <tr>
+            <td>{{data.Cidade_Comprador}}</td>
+            <td>{{data.Cidade_Fornecedor}}</td>
+            <td>{{data.Comprador}}</td>
+            <td>{{data.Estado_Comprador}}</td>
+        </tr>
+    </ng-template>
+  </p-table>
+</div>
