@@ -1,4 +1,32 @@
-<div style="width: 700px; background-color: black;">
-  <canvas id="myChart"></canvas>
+<div class="container">
+  <div class="chart-container">
+    <canvas id="myChart"></canvas>
+    <!-- <input type="text" [(ngModel)]="fProduct" placeholder="filter">
+    <button type="button" (click)="filtered()" class="btn btn-outline-secondary" style="color: #ffffff; width: 100px; margin-top: 80px;">Filtrar</button> -->
+  </div>
+  <div class="filter-container">
+    <div style="height: 500px;">
+      <p class="text-center" style="margin-top: 15px; color: #ffffff;">Ranking Fornecedores - {{yearC}}</p>
+      <ngx-charts-tree-map
+        [view]="view"
+        [scheme]="colorScheme"
+        [results]="single"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+      >
+      </ngx-charts-tree-map>
+    </div>
+    <div style="height: 500px;">
+      <p class="text-center" style="margin-top: 15px; color: #ffffff;">Ranking Compradores - {{yearC}}</p>
+      <ngx-charts-tree-map
+        [view]="view"
+        [scheme]="colorScheme2"
+        [results]="singleClient"
+        [gradient]="gradient"
+        [tooltipDisabled]="tooltipDisabled"
+      >
+      </ngx-charts-tree-map>
+    </div>
+  </div>
 </div>
 
