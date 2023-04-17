@@ -1,8 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
-import { HttpClient } from '@angular/common/http';
-import { map } from 'rxjs';
-
+import { GetDataService } from 'src/app/services/get-data.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,10 +10,18 @@ import { map } from 'rxjs';
 export class DashboardComponent implements OnInit {
   chart!: Chart;
   jsonData: any;
+  dataArray = [];
 
-  constructor(private http: HttpClient) {}
+  constructor(private getData: GetDataService) {}
 
-  ngOnInit() {
+  async ngOnInit() {
+    this.loadChart();
+    this.dataArray = await this.getData.getArray();
+    console.log(this.dataArray);
+  }
+
+  //Carrega o gráfico de teste para visualizarmos os dados
+  loadChart() {
     const canvas = document.getElementById('myChart') as HTMLCanvasElement;
     console.log('Canvas element:', canvas);
 
@@ -77,30 +83,5 @@ export class DashboardComponent implements OnInit {
     } else {
       console.error('Failed to find the canvas element.');
     }
-
-
-    this.getJsonData().subscribe(data => {
-      this.jsonData = data;
-      console.log(this.jsonData); // exibe o conteúdo do arquivo JSON
-    });
-
-
-    // Exemplo de arquivo JSON extraído do banco de dados
-    let json =
-      '[{"id": 1, "name": "John"}, {"id": 2, "name": "Jane"}, {"id": 3, "name": "Bob"}]';
-
-    // Analisa o JSON e converte-o em um objeto JavaScript
-    let data = JSON.parse(json);
-
-    console.log(data);
-  }
-
-  getJsonData() {
-    return this.http.get('/assets/data/dados.json')
-      .pipe(
-        map((response: any) => {
-          return response;
-        })
-      );
   }
 }

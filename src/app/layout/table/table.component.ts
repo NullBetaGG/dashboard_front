@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { GetDataService } from 'src/app/services/get-data.service';
 
 @Component({
   selector: 'app-table',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TableComponent implements OnInit {
 
-  constructor() { }
+  jsonData: any;
+  dataArray = [];
 
-  ngOnInit() {
+  constructor(private getData: GetDataService) { }
+
+  async ngOnInit() {
+    this.dataArray = await this.getData.getArray();
   }
+
 
 }

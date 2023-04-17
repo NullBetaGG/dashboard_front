@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  display = false;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  openUser() {
+    this.display = true;
   }
 
 }
