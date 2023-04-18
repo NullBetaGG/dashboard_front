@@ -1,0 +1,16 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  max-width: 1400px;
+  background-color: black;
+}
+
+.chart-container, .filter-container {
+  display: inline-block;
+  width: calc(50% - 10px);
+}
+
+.filter-container {
+  margin-left: 20px;
+}

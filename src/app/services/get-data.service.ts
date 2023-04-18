@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs';
+import * as moment from 'moment';
 
 @Injectable({
   providedIn: 'root',
@@ -32,4 +33,5 @@ export class GetDataService {
     this.dataArray = Object.values(data);
     console.log(this.dataArray);
   }
+
 }

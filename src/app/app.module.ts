@@ -15,6 +15,9 @@ import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { SidebarModule } from 'primeng/sidebar';
+import { MenuModule } from 'primeng/menu';
 
 @NgModule({
   declarations: [
@@ -33,8 +36,12 @@ import { LoginComponent } from './login/login.component';
     ButtonModule,
     DialogModule,
     CardModule,
-    FormsModule
+    FormsModule,
+    NgxChartsModule,
+    SidebarModule,
+    MenuModule
   ],
+  exports: [DashboardComponent],
   providers: [],
   bootstrap: [AppComponent]
 })

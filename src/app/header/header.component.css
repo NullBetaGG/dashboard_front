@@ -24,3 +24,17 @@
   0% { background-position: left; }
   100% { background-position: right; }
 }
+
+.sidebar-menu {
+  width: 200px;
+  height: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #f2f2f2;
+  box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.sidebar-menu .p-menu {
+  width: 100%;
+}
