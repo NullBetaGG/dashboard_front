@@ -15,9 +15,11 @@ import { DialogModule } from 'primeng/dialog';
 import { CardModule } from 'primeng/card';
 import { FormsModule } from '@angular/forms';
 import { LoginComponent } from './login/login.component';
-import { NgxChartsModule } from '@swimlane/ngx-charts';
 import { SidebarModule } from 'primeng/sidebar';
 import { MenuModule } from 'primeng/menu';
+import { DropdownModule } from 'primeng/dropdown';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ApexOptions } from 'apexcharts';
 
 @NgModule({
   declarations: [
@@ -37,9 +39,10 @@ import { MenuModule } from 'primeng/menu';
     DialogModule,
     CardModule,
     FormsModule,
-    NgxChartsModule,
     SidebarModule,
-    MenuModule
+    MenuModule,
+    DropdownModule,
+    BrowserAnimationsModule,
   ],
   exports: [DashboardComponent],
   providers: [],

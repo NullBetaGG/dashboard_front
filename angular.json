@@ -16,6 +16,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+              "rxjs-compat",
+              "moment"
+            ],
             "outputPath": "dist/dashboard_front",
             "index": "src/index.html",
             "main": "src/main.ts",
