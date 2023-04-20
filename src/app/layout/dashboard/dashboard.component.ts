@@ -370,11 +370,12 @@ export class DashboardComponent implements OnInit {
       .style('left', (d: TreemapNode) => d.x0 + 900 + 'px')
       .style('top', (d: TreemapNode) => d.y0 + 150 + 'px')
       .style('background', (d: TreemapNode) => {
-        const color = d.parent ? colorScale(d.parent.data.name) : colorScale(d.data.name);
+        const color = d.parent
+          ? colorScale(d.parent.data.name)
+          : colorScale(d.data.name);
         const brightness = d.data.value / (d.parent?.value ?? 1);
         const darkerColor = d3.color(color)?.darker(brightness);
         return darkerColor ? darkerColor.toString() : null;
       });
   }
-
 }

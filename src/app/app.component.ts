@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd  } from '@angular/router';
+import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 
 @Component({
@@ -7,19 +7,14 @@ import { filter } from 'rxjs/operators';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+export class AppComponent {
+  showHeader = true;
 
-export class AppComponent  {
-  title = 'dashboard_front';
-
-  showHeader: boolean = false;
-
-  constructor(private router: Router) {}
-
-  ngOnInit() {
-    this.router.events
-    .pipe(filter((event) => event instanceof NavigationEnd))
-    .subscribe(() => {
-      this.showHeader = !(this.router.url === '/login');
+  constructor(private router: Router) {
+    this.router.events.pipe(
+      filter((event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.showHeader = !event.url.includes('/login');
     });
   }
 }
