@@ -5,7 +5,46 @@
   </button>
 </div>
 
+<!-- Sidebar menu -->
+<p-sidebar [(visible)]="displayMenu" position="left" [style]="{width:'20em', 'z-index':'20'}">
+  <div>
+
+  </div>
+</p-sidebar>
+
 <!-- Dialog de conta do usuário -->
-<p-dialog header="Title" [(visible)]="display" [style]="{width: '50vw'}">
-  <p>TESTE</p>
-</p-dialog>
+<p-sidebar [(visible)]="display" position="right"
+  [style]="{width:'17em', height:'16em', 'border-radius': '10px', 'z-index':'20'}">
+  <div>
+    <div style="display: flex;">
+      <img src="../../assets/img/user.png" alt="user" width="30px" height="30px">
+      <h6 style="margin-left: 15px; margin-top: 6px;">{{user}}</h6>
+    </div>
+    <div style="display: flex; margin-top: 5px; justify-content: space-between;">
+      <button pButton type="button" class="p-button-text p-button-primary"
+        style="margin-top: 3px; height: 40px; width: 200px;">
+        <img src="../../assets/img/settings.png" alt="user" width="30px" height="30px" style="margin-left: -20px;">
+        <p style="margin-top: 14px; margin-left: 15px; font-size: larger; font-weight: 450; color: black;">Preferências
+        </p>
+      </button>
+    </div>
+    <div style="display: flex; margin-top: 5px; justify-content: space-between;">
+      <button (click)="sair()" pButton type="button" class="p-button-text p-button-danger"
+        style="margin-top: 3px; height: 35px; width: 200px;">
+        <img src="../../assets/img/sair.png" alt="user" width="30px" height="30px" style="margin-left: -20px;">
+        <p style="margin-top: 14px; margin-left: 15px; font-size: larger; font-weight: 450; color: black;">Sair</p>
+      </button>
+    </div>
+  </div>
+</p-sidebar>
+
+<!-- Dialog de logoff -->
+<p-confirmDialog #cd [style]="{width: '15vw'}">
+  <ng-template pTemplate="header">
+    <h3>Atenção</h3>
+  </ng-template>
+  <ng-template pTemplate="footer">
+    <button type="button" pButton class="p-button-danger" icon="pi pi-times" label="Não" (click)="cd.reject()"></button>
+    <button type="button" pButton icon="pi pi-check" label="Sim" (click)="cd.accept()"></button>
+  </ng-template>
+</p-confirmDialog>

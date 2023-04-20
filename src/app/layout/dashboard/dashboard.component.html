@@ -1,32 +1,25 @@
-<div class="container">
-  <div class="chart-container">
-    <canvas id="myChart"></canvas>
-    <!-- <input type="text" [(ngModel)]="fProduct" placeholder="filter">
-    <button type="button" (click)="filtered()" class="btn btn-outline-secondary" style="color: #ffffff; width: 100px; margin-top: 80px;">Filtrar</button> -->
-  </div>
-  <div class="filter-container">
-    <div style="height: 500px;">
-      <p class="text-center" style="margin-top: 15px; color: #ffffff;">Ranking Fornecedores - {{yearC}}</p>
-      <ngx-charts-tree-map
-        [view]="view"
-        [scheme]="colorScheme"
-        [results]="single"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-      >
-      </ngx-charts-tree-map>
-    </div>
-    <div style="height: 500px;">
-      <p class="text-center" style="margin-top: 15px; color: #ffffff;">Ranking Compradores - {{yearC}}</p>
-      <ngx-charts-tree-map
-        [view]="view"
-        [scheme]="colorScheme2"
-        [results]="singleClient"
-        [gradient]="gradient"
-        [tooltipDisabled]="tooltipDisabled"
-      >
-      </ngx-charts-tree-map>
-    </div>
-  </div>
+<div style="background-color: black; padding: 20px; display: flex;">
+  <h4 style="font-family: Titillium Web; color: #ffffff; margin-top: 10px; margin-right: 30px;">Selecione o Ano</h4>
+  <p-dropdown [options]="years" (onChange)="onYearChange()" [(ngModel)]="yearC" optionLabel="year"
+    optionValue="year"></p-dropdown>
 </div>
 
+<div class="cont">
+  <div class="chart-container">
+    <canvas style="margin-top: 40px;" id="myChart"></canvas>
+    <div style="margin-top: 20px; margin-left: 30px; width: 700px;" id="chart"></div>
+  </div>
+</div>
+<div id="treeChart"></div>
+
+
+
+
+
+
+
+<!-- <div style="display: flex; margin-top: 20px; padding: 20px;">
+  <h4 style="font-family: Titillium Web; color: #ffffff; margin-top: 10px; margin-right: 30px;">Selecione o Produto
+  </h4>
+  <p-dropdown [options]="product" (onChange)="onChangeProduct()" [(ngModel)]="yearC" optionLabel="year"optionValue="year"></p-dropdown>
+</div> -->
