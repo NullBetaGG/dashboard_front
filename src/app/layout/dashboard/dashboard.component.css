@@ -15,3 +15,9 @@
   background-color: black !important;
 }
 
+.nodes.client {
+  background-color: #ffcc00; /* define uma cor de fundo amarela */
+  color: black; /* define a cor do texto para preto */
+  font-weight: bold; /* define a fonte em negrito */
+}
+
