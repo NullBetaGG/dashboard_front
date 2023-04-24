@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import Chart from 'chart.js/auto';
 import { GetDataService } from 'src/app/services/get-data.service';
+import * as LightweightCharts from 'lightweight-charts';
 import * as moment from 'moment';
 import * as d3 from 'd3';
 
@@ -50,6 +51,7 @@ export class DashboardComponent implements OnInit {
   data: any[] = [];
   colorScale = d3.scaleOrdinal(d3.schemeCategory10);
   product: Product[] = [];
+  arrDateFilter: Record<number, Record<number, any[]>> = {};
 
   constructor(private getData: GetDataService) {
     this.years = [
@@ -105,29 +107,28 @@ export class DashboardComponent implements OnInit {
       const dateMoment = moment(dateString, 'YYYY-MM-DD');
       this.dataArray[i].date = dateMoment;
     }
-    const arrDateFilter: Record<number, Record<number, any[]>> = {};
 
     this.dataArray.forEach((obj: any) => {
       const month = moment(obj.date).month();
       const year = moment(obj.date).year();
 
-      if (!arrDateFilter[year]) {
-        arrDateFilter[year] = {};
+      if (!this.arrDateFilter[year]) {
+        this.arrDateFilter[year] = {};
       }
-      if (!arrDateFilter[year][month]) {
-        arrDateFilter[year][month] = [];
+      if (!this.arrDateFilter[year][month]) {
+        this.arrDateFilter[year][month] = [];
       }
 
-      arrDateFilter[year][month].push(obj);
+      this.arrDateFilter[year][month].push(obj);
     });
     console.log(this.dataArray);
-    console.log(arrDateFilter);
+    console.log(this.arrDateFilter);
 
     let soma = 0;
     const arrayDeSomas = [];
 
     for (let idx = 0; idx < 12; idx++) {
-      const element = arrDateFilter[this.yearC][idx];
+      const element = this.arrDateFilter[this.yearC][idx];
       if (element) {
         for (let i = 0; i < element.length; i++) {
           const obj = element[i].Quantidade;
@@ -138,9 +139,10 @@ export class DashboardComponent implements OnInit {
       soma = 0;
     }
 
-    this.filterF(arrDateFilter);
-    this.filterC(arrDateFilter);
+    this.filterF();
+    this.filterC();
     this.loadChart(arrayDeSomas);
+    this.filterProd();
     this.loadNested();
   }
 
@@ -232,11 +234,11 @@ export class DashboardComponent implements OnInit {
     this.singleClient = top10;
   }
 
-  filterF(arrDateFilter: any) {
+  filterF() {
     const fornecedorTotais: FornecedorTotal[] = [];
     for (let month = 0; month < 12; month++) {
-      if (arrDateFilter[this.yearC][month]) {
-        arrDateFilter[this.yearC][month].forEach((contrato: any) => {
+      if (this.arrDateFilter[this.yearC][month]) {
+        this.arrDateFilter[this.yearC][month].forEach((contrato: any) => {
           const fornecedorTotalIndex = fornecedorTotais.findIndex(
             (fornecedorTotal) => {
               return fornecedorTotal.name === contrato.Fornecedor;
@@ -260,11 +262,11 @@ export class DashboardComponent implements OnInit {
     this.loadTree(fornecedorTotais);
   }
 
-  filterC(arrDateFilter: any) {
+  filterC() {
     const clientesTotais: ClienteTotal[] = [];
     for (let month = 0; month < 12; month++) {
-      if (arrDateFilter[this.yearC][month]) {
-        arrDateFilter[this.yearC][month].forEach((contrato: any) => {
+      if (this.arrDateFilter[this.yearC][month]) {
+        this.arrDateFilter[this.yearC][month].forEach((contrato: any) => {
           const clienteTotalIndex = clientesTotais.findIndex((clienteTotal) => {
             return clienteTotal.name === contrato.Comprador;
           });
@@ -296,6 +298,153 @@ export class DashboardComponent implements OnInit {
       }
     }
     console.log(arrayFiltrado);
+  }
+
+  filterProd() {
+    const produtosValores: any[] = [];
+
+    for (let year in this.arrDateFilter) {
+      for (let month in this.arrDateFilter[year]) {
+        if (this.arrDateFilter[year][month]) {
+          const produtos = this.arrDateFilter[year][month];
+          for (let i = 0; i < produtos.length; i++) {
+            const produto = produtos[i].Produto;
+            const vrPreco = produtos[i].vl_preco;
+            const unidade = produtos[i].Unidade;
+            const momentDate = produtos[i].date;
+            const date = momentDate.format('YYYY-MM-DD');
+            const index = produtosValores.findIndex(
+              (item: any) => item.produto === produto
+            );
+            if (index !== -1) {
+              const dataIndex = produtosValores[index].datas.findIndex(
+                (item: any) => item.date === date
+              );
+              if (dataIndex !== -1) {
+                produtosValores[index].datas[dataIndex].somaVrPreco += vrPreco;
+                produtosValores[index].datas[dataIndex].qtd += 1;
+                if (vrPreco > produtosValores[index].datas[dataIndex].max) {
+                  produtosValores[index].datas[dataIndex].max = vrPreco;
+                }
+                if (vrPreco < produtosValores[index].datas[dataIndex].min) {
+                  produtosValores[index].datas[dataIndex].min = vrPreco;
+                }
+                produtosValores[index].datas[dataIndex].avrg =
+                  produtosValores[index].datas[dataIndex].somaVrPreco /
+                  produtosValores[index].datas[dataIndex].qtd;
+                produtosValores[index].datas.sort(
+                  (
+                    a: { date: moment.MomentInput },
+                    b: { date: moment.MomentInput }
+                  ) => {
+                    return moment(a.date).unix() - moment(b.date).unix();
+                  }
+                );
+              } else {
+                produtosValores[index].datas.push({
+                  date,
+                  unidade,
+                  max: vrPreco,
+                  min: vrPreco,
+                  avrg: vrPreco,
+                  qtd: 1,
+                });
+                produtosValores[index].datas.sort(
+                  (
+                    a: { date: moment.MomentInput },
+                    b: { date: moment.MomentInput }
+                  ) => {
+                    return moment(a.date).unix() - moment(b.date).unix();
+                  }
+                );
+              }
+            } else {
+              produtosValores.push({
+                produto,
+                datas: [
+                  {
+                    date,
+                    unidade,
+                    max: vrPreco,
+                    min: vrPreco,
+                    avrg: vrPreco,
+                    qtd: 1,
+                  },
+                ],
+              });
+            }
+          }
+        }
+      }
+    }
+    produtosValores.sort((a, b) => a.produto.localeCompare(b.produto));
+    this.chartPrice(produtosValores[32].datas);
+    console.log(produtosValores);
+    return produtosValores;
+  }
+
+  chartPrice(data: any[] | undefined) {
+    const chartElement = document.getElementById('chart');
+
+    if (chartElement) {
+      const chart = LightweightCharts.createChart(chartElement, {
+        width: 700,
+        height: 400,
+        layout: {
+          background: {
+            color: '#000000',
+          },
+          textColor: '#333',
+        },
+        grid: {
+          vertLines: {
+            color: '#D3D3D3',
+          },
+          horzLines: {
+            color: '#D3D3D3',
+          },
+        },
+        crosshair: {
+          mode: LightweightCharts.CrosshairMode.Normal,
+        },
+        timeScale: {
+          borderColor: '#D3D3D3',
+        },
+      });
+
+      const maxLine = chart.addLineSeries({
+        color: '#6a0000',
+      });
+      const minLine = chart.addLineSeries({
+        color: '#005607',
+      });
+      const avgLine = chart.addLineSeries({
+        color: '#000b56',
+      });
+
+      const chartData = data
+        ? data
+            .sort((a, b) => a.time - b.time)
+            .map((item) => {
+              return {
+                time: item.date,
+                value: item.avrg,
+                max: item.max,
+                min: item.min,
+              };
+            })
+        : [];
+
+      maxLine.setData(
+        chartData.map((item) => ({ time: item.time, value: item.max }))
+      );
+      minLine.setData(
+        chartData.map((item) => ({ time: item.time, value: item.min }))
+      );
+      avgLine.setData(
+        chartData.map((item) => ({ time: item.time, value: item.value }))
+      );
+    }
   }
 
   onYearChange() {
