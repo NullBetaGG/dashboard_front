@@ -1,6 +1,6 @@
 <div style="display: flex; height: 100vh; position: relative;">
   <div style="position: relative;">
-    <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-color: #ff6600; opacity: 0.1; z-index: 10;"></div>
+    <!-- <div style="position: absolute; top: 0; left: 0; height: 100%; width: 100%; background-color: #ff6600; opacity: 0.1; z-index: 10;"></div> -->
     <img src="../../assets/img/banner.png" alt="login" style="height: 100%; width: 100%; z-index: 1;">
   </div>
   <div style="background-color: #000000; width: 30%; z-index: 12; position: absolute; right: 0; height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center;">
@@ -8,10 +8,10 @@
       <img src="../../assets/img/logo1.png" alt="logo" width="250px" style="margin-top: 20%;">
       <h4 style="color: #ffffff; margin-top: 8%; font-family: Titillium Web;" >LOGIN</h4>
     </div>
-    <div style="height: 60vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+    <div style="height: 60vh; width: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center; margin-top: -75px;">
       <input type="text" [(ngModel)]="email" placeholder="E-Mail">
       <input type="password" [(ngModel)]="password" placeholder="Senha" style="margin-top: 60px;">
-      <button type="button" (click)="validate()" class="btn btn-outline-secondary" style="color: #ffffff; width: 100px; margin-top: 80px;">Entrar</button>
+      <button type="button" (click)="validate()" class="btn btn-outline-secondary" style="color: #ffffff; width: 360px; margin-top: 50px;">Entrar</button>
     </div>
   </div>
   <p-toast position="top-right"></p-toast>

@@ -2,9 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
-import { AppComponent  } from './app.component';
+import { AppComponent } from './app.component';
 
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from './layout/not-found/not-found.component';
 import { DashboardComponent } from './layout/dashboard/dashboard.component';
 import { TableComponent } from './layout/table/table.component';
 import { HeaderComponent } from './header/header.component';
@@ -22,6 +22,18 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastModule } from 'primeng/toast';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { ApexOptions } from 'apexcharts';
+import { SidebarComponent } from './sidebar/sidebar.component';
+import { SellerComponent } from './layout/seller/seller.component';
+import { SuppliersComponent } from './layout/suppliers/suppliers.component';
+import { SettingsComponent } from './layout/settings/settings.component';
+import { LottieModule } from 'ngx-lottie';
+import { ConstructionComponent } from './layout/construction/construction.component';
+import { MapsComponent } from './layout/maps/maps.component';
+import { LoadingComponent } from './layout/loading/loading.component';
+
+export function playerFactory() {
+  return import('lottie-web');
+}
 
 @NgModule({
   declarations: [
@@ -30,8 +42,15 @@ import { ApexOptions } from 'apexcharts';
     DashboardComponent,
     NotFoundComponent,
     HeaderComponent,
-    LoginComponent
-   ],
+    LoginComponent,
+    SidebarComponent,
+    SellerComponent,
+    SuppliersComponent,
+    SettingsComponent,
+    ConstructionComponent,
+    MapsComponent,
+    LoadingComponent
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -46,10 +65,11 @@ import { ApexOptions } from 'apexcharts';
     DropdownModule,
     BrowserAnimationsModule,
     ToastModule,
-    ConfirmDialogModule
+    ConfirmDialogModule,
+    LottieModule.forRoot({ player: playerFactory }),
   ],
   exports: [DashboardComponent],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

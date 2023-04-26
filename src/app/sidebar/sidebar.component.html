@@ -1,0 +1,59 @@
+<nav class="sidebar" [ngClass]="{collapsed: collapsed}">
+  <div style="height: 10px; background-color: #222222;"></div>
+  <div class="buttons">
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/dash')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/painel-de-controle.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Dashboard' }}</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/tables')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/grafico-de-barras-crescente.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Gráficos' }}</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/seller')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/mao_w.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Vendedores' }}</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/maps')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/mapa_w.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Regiões' }}</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/suppliers')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/crescimento.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Fornecedores' }}</span>
+        </a>
+      </div>
+    </div>
+    <div style="height: 40px; background-color: #222222;">
+      <div>
+        <a class="list-group-item" (click)="clickMenu('/settings')" [routerLinkActive]="['router-link-active']">
+          <img src="../../assets/img/configuracoes.png" style="margin-top: -5px;" alt="" width="25px">
+          &nbsp;
+          <span style="color: #ffffff;">{{ 'Configurações' }}</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</nav>

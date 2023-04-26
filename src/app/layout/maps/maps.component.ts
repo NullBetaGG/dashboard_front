@@ -12,10 +12,10 @@ export class MapsComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    this.http
-      .get('/assets/data/mapa_armazens_MG.html', { responseType: 'text' })
-      .subscribe((data) => {
-        this.conteudoHtml = data;
-      });
+    // this.http
+    //   .get('/assets/data/mapa_armazens_MG.html', { responseType: 'text' })
+    //   .subscribe((data) => {
+    //     this.conteudoHtml = data;
+    //   });
   }
 }

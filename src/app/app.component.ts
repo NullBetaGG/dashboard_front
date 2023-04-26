@@ -9,6 +9,7 @@ import { filter } from 'rxjs/operators';
 })
 export class AppComponent {
   showHeader = true;
+  collapedSideBar: boolean | undefined;
 
   constructor(private router: Router) {
     this.router.events.pipe(
@@ -17,4 +18,7 @@ export class AppComponent {
       this.showHeader = !event.url.includes('/login');
     });
   }
+  receiveCollapsed($event: boolean | undefined) {
+    this.collapedSideBar = $event;
+}
 }
